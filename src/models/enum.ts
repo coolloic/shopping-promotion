@@ -1,8 +1,6 @@
 export enum EGroupType {
-    COUNTER = "counter",
     DICTIONARY = "dictionary",
     MUL_DICTIONARY = "multiDictionary",
-    GROUP_VALUE = "group",
 }
 
 export enum EPromotionType {

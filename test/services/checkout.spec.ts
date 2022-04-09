@@ -3,7 +3,7 @@ import {Checkout} from "../../src/services/checkout";
 import {IPricingRules} from "../../src/models/pojo";
 
 import {IProductEntity} from "../../src/models/entity";
-import {ESku} from "../mock/mock";
+import {ESku} from "../mock";
 
 describe("Checkout", () => {
     test.each([
