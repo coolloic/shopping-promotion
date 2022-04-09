@@ -1,9 +1,13 @@
 import {Checkout} from "../../src/services/checkout";
-
+import {
+    ESku,
+    prodPromoRelationsMock,
+    productsMock,
+    promotionAlgorithmsMock,
+} from "../mock";
 import {IPricingRules} from "../../src/models/pojo";
-
-import {IProductEntity} from "../../src/models/entity";
-import {ESku} from "../mock";
+import {groupBy} from "../../src/utils/utils";
+import {EGroupType} from "../../src/models/enum";
 
 describe("Checkout", () => {
     test.each([
@@ -13,13 +17,15 @@ describe("Checkout", () => {
     ])(
         "when given %s should return %s",
         (skuList: ESku[], expectedTotal: number) => {
-            const prodPromoRelationsMock = {} as any;
-            const promotionAlgorithmsMock = {} as any;
-            const productRecord:Record<string, IProductEntity> = {}
             const pricingRules: IPricingRules = {
                 productPromoRelations: prodPromoRelationsMock,
                 promoAlgorithms: promotionAlgorithmsMock,
             };
+            const productRecord = groupBy({
+                items: productsMock,
+                key: "sku",
+                type: EGroupType.DICTIONARY,
+            });
 
             const cart: Checkout = new Checkout(pricingRules);
 

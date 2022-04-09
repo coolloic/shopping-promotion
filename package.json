@@ -4,6 +4,7 @@
   "description": "shopping promotion solution",
   "main": "index.js",
   "scripts": {
+    "build": "tsc --project tsconfig.json",
     "test": "jest --forceExit --detectOpenHandles --coverage"
   },
   "repository": {

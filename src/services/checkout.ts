@@ -5,6 +5,8 @@ import {
 import {IProductEntity, IProductPromotionRelation, IPromotionAlgorithmEntity} from "../models/entity";
 import {groupBy} from "../utils/utils";
 import {EGroupType} from "../models/enum";
+import {PromotionStrategyFactory} from "./strategy";
+import {add} from "mathjs";
 
 export class Checkout implements ICheckOut {
     readonly productPromoDictionary: Record<string,
@@ -70,6 +72,17 @@ export class Checkout implements ICheckOut {
     }
 
     total(): number {
-        return 0;
+        // works out the discount for product order
+        for (const productOrder of Object.values(this.cart)) {
+            if (!Array.isArray(productOrder.promotionAlgorithms)) continue;
+            const {type} = productOrder.promotionAlgorithms[0];
+            const promoStrategy = PromotionStrategyFactory[type].call(this);
+            promoStrategy.apply(productOrder, this.cart);
+        }
+
+        // get total
+        return Object.values(this.cart)
+            .map(({total, discount}: IProductOrder) => discount ?? total)
+            .reduce((total: number, skuTotal: number) => add(total, skuTotal));
     }
 }
