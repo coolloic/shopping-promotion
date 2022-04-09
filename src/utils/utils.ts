@@ -9,7 +9,7 @@ import {GroupByOptions} from "../models/pojo";
 import {EGroupType} from "../models/enum";
 
 export const groupBy: (groupOpts: GroupByOptions) => Record<string, any> = ({
-                                                                                key = "",
+                                                                                key,
                                                                                 items,
                                                                                 type,
                                                                             }: GroupByOptions): Record<string, any> => {
