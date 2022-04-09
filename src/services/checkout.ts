@@ -60,10 +60,9 @@ export class Checkout implements ICheckOut {
                 (x: IProductPromotionRelation) => x.pid
             );
 
-        const promotionAlgorithms = isPromotionAvailable()
+        return isPromotionAvailable()
             ? getPromotionAlgorithms(getPromotionAlgorithmIds(productPromoRelationArray))
             : undefined;
-        return promotionAlgorithms
     }
 
     /**
