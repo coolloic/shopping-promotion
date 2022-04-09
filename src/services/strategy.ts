@@ -8,6 +8,14 @@ import {EPromotionType} from "../models/enum";
 
 export class BuyXGetYFreeStrategy implements IPromotionStrategy {
     type = EPromotionType.BUY_X_GET_Y_FREE;
+    private static instance = new BuyXGetYFreeStrategy();
+
+    private constructor() {
+    }
+
+    static singleton() {
+        return BuyXGetYFreeStrategy.instance;
+    }
 
     apply(
         item: IProductOrder,
@@ -33,6 +41,11 @@ export class BuyXGetYFreeStrategy implements IPromotionStrategy {
 
 export class BundleSaleStrategy implements IPromotionStrategy {
     type = EPromotionType.BUNDLE_SALE;
+    public static instance = new BundleSaleStrategy();
+
+    static singleton() {
+        return BundleSaleStrategy.instance;
+    }
 
     apply(
         item: IProductOrder,
@@ -60,6 +73,11 @@ export class BundleSaleStrategy implements IPromotionStrategy {
 
 export class BuyXWithLowerPriceStrategy implements IPromotionStrategy {
     type = EPromotionType.BUY_X_WITH_LOWER_PRICE;
+    public static instance = new BuyXWithLowerPriceStrategy();
+
+    static singleton() {
+        return BuyXWithLowerPriceStrategy.instance;
+    }
 
     apply(
         item: IProductOrder,
@@ -82,7 +100,7 @@ export class BuyXWithLowerPriceStrategy implements IPromotionStrategy {
 export const PromotionStrategyFactory: Record<EPromotionType,
     () => IPromotionStrategy> = {
     [EPromotionType.BUY_X_WITH_LOWER_PRICE]: () =>
-        new BuyXWithLowerPriceStrategy(),
-    [EPromotionType.BUY_X_GET_Y_FREE]: () => new BuyXGetYFreeStrategy(),
-    [EPromotionType.BUNDLE_SALE]: () => new BundleSaleStrategy(),
+        BuyXWithLowerPriceStrategy.singleton(),
+    [EPromotionType.BUY_X_GET_Y_FREE]: () => BuyXGetYFreeStrategy.singleton(),
+    [EPromotionType.BUNDLE_SALE]: () => BundleSaleStrategy.singleton(),
 };
