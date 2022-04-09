@@ -22,8 +22,8 @@ The purpose of the readme are:
 ***
 ## High level design
 UML high level design
-* [Entity Relationship Diagram](./assets/retail-promotion-er.jpg)
-* [Class Diagram](./assets/retail-promotion-class-diagram.jpg)
+* Entity Relationship Diagram ![Entity Relationship Diagram](./assets/retail-promotion-er.jpg)
+* Class Diagram ![Class Diagram](./assets/retail-promotion-class-diagram.jpg)
 ***
 ## Database Entities 
 ### product
